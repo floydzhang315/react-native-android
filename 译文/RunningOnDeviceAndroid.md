@@ -1,38 +1,29 @@
----
-id: running-on-device-android
-title: Running On Device (Android)
-layout: docs
-category: Guides
-permalink: docs/running-on-device-android.html
-next: embedded-app-ios
----
+## USB 调试
 
-## USB Debugging
+在设备上开发最简单的方式就是使用 USB 调试。首先请确保你有 [USB debugging enabled on your device](https://www.google.com/search?q=android+Enable+USB+debugging)。一旦在设备上调试是被允许的，在连接的设备上你可以以同样的方式在模拟器里面使用  `react-native run-android` 来安装并且运行你的 React Native 应用。
 
-The easiest way to develop on a device is by USB debugging. First, make sure you have [USB debugging enabled on your device](https://www.google.com/search?q=android+Enable+USB+debugging). Once debugging is enabled on the device you can use `react-native run-android` in the same way as with emulator to install and launch your React Native app on the connected device.
+## 从设备上获取开发服务器
 
-## Accessing development server from device
+你也可以在设备上使用开发服务器快速集成。照着下面的描述的步骤之一来给你的设备构建在你的电脑上运行的开发者服务器。
 
-You can also iterate quickly on device using the development server. Follow one of the steps described below to make your development server running on your laptop accessible for your device.
-
-> Hint
+> 注意
 >
-> Most modern android devices don't have a hardware menu button, which we use to trigger developer menu. In that case you can shake the device to open dev menu (reload, debug, etc.)
+> 现在绝大多数的安卓设备没有一个我们来触发开发者模式的硬件按钮键。如果是那样的话，你可以通过摇动来开启开发者模式（重新加载，调试等）。
 
-### Using adb reverse
+### 使用 adb 反转
 
-> Note that this option is available on devices running android 5.0+ (API 21).
+> 请注意这个选项只支持运行在安卓 5.0+ (API 21) 上面的设备。
 
-Have your device connected via USB with debugging enabled (see paragraph above on how to enable USB debugging on your device).
+使用 USB 将你的设备连接，并开启调试模式（可以看看上面如何在你的设备上面允许 USB 调试模式）。
 
-1. Run `adb reverse tcp:8081 tcp:8081`
-2. You can use `Reload JS` and other development options with no extra configuration
+1. 运行 `adb reverse tcp:8081 tcp:8081`
+2. 你可以使用 `Reload JS` 和其他开发者参数，而不需要额外的配置
 
-### Configure device to connect to the dev server via Wi-Fi
+### 通过 Wi-Fi 来配置设备并且连接上你的开发者服务器
 
-To do that, your laptop and your phone have to be on the same wifi network.
+要做到这一点，你的电脑和你的手机必须在同一个 wifi 网络下。
 
-1. Open rage shake menu (shake the device)
-2. Go to `Dev Settings`
-3. Go to `Debug server host for device`
-4. Type in your machine's IP and `Reload JS`
+1. 打开震动菜单 (摇动设备)
+2. 前往 `Dev Settings`
+3. 前往 `Debug server host for device`
+4. 输入该设备的 IP 和 `Reload JS`
