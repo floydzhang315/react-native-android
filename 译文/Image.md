@@ -44,9 +44,9 @@ var icon = this.props.active ? require('image!my-icon-active') : require('image!
 
 *这一进程正在被改进，不久就会提供更好的工作流程。*
 
-## Network Resources
+## 网络资源
 
-Many of the images you will display in your app will not be available at compile time, or you will want to load some dynamically to keep the binary size down. Unlike with static resources, *you will need to manually specify the dimensions of your image.*
+在您进行编译的时候，许多您的应用程序中需要展示的图片都不能使用，或者你会想要通过加载一些动态图片来保持二进制大小在较低的状态。不像静态资源那样，*您将需要手动指定图像的尺寸*。 
 
 ```javascript
 // GOOD
@@ -57,14 +57,13 @@ Many of the images you will display in your app will not be available at compile
 <Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}} />
 ```
 
-## Local Filesystem Resources
+## 本地文件系统资源
 
-See [CameraRoll](/react-native/docs/cameraroll.html) for an example of
-using local resources that are outside of `Images.xcassets`.
+请在 [CameraRoll](/react-native/docs/cameraroll.html) 中查看使用 `Images.xcassets` 之外的本地资源示例 。
 
-### Best Camera Roll Image
+### 最好的相片册图片
 
-iOS saves multiple sizes for the same image in your Camera Roll, it is very important to pick the one that's as close as possible for performance reasons. You wouldn't want to use the full quality 3264x2448 image as source when displaying a 200x200 thumbnail. If there's an exact match, React Native will pick it, otherwise it's going to use the first one that's at least 50% bigger in order to avoid blur when resizing from a close size. All of this is done by default so you don't have to worry about writing the tedious (and error prone) code to do it yourself.
+iOS 的相片册可以让你将同一张图片保存为不同的尺寸，对于选择那张接近你想要尺寸的图片来说，这很重要。你不会想用一张 3264x2448 分辨率的图片作为资源来显示一个 200x200 的缩略图。如果确实有符合你要求的尺寸， React Native 会自动选择它，否则它会使用第一张比特定尺寸大 50% 的图片来避免重新定义尺寸时带来的模糊失真。这些工作 React Native 自动帮你完成了，所以你不必再自己编写乏味和容易出错的代码。
 
 ## Why Not Automatically Size Everything?
 
