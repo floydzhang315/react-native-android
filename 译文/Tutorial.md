@@ -22,7 +22,7 @@ React Native 需要一些在 [开始 React Native](https://facebook.github.io/re
 
 在 iOS 端，现在你可以在 Xcode 里面打开这个新项目 (`AwesomeProject/AwesomeProject.xcodeproj`)，然后使用 `⌘+R` 来简单的构建和运行这个项目。这样做也会开启允许代码实时渲染的 Node 服务器。有了它你可以通过在模拟器里面按住 `⌘+R` 来看你的更改，而不用在 Xcode 里面重新编译。
 
-在 Android 端，在 `AwesomeProject` 里面运行 `react-native run-android` 来在你的模拟器设备上面安装生成的应用，并且开启允许代码实时渲染的 Node 服务器。为了看到你的更改你必须打开震动菜单（摇动你的设备或者按住设备上面的菜单按钮，在模拟器上面按住 F2 或者 Page Up,在 Genymotion 上面按住 ⌘+M），然后点击 `Reload JS`。
+在 Android 端，在 `AwesomeProject` 里面运行 `react-native run-android` 来在你的模拟器设备上面安装生成的应用，并且开启允许代码实时渲染的 Node 服务器。为了看到你的更改你必须打开震动菜单（摇动你的设备或者按住设备上面的菜单按钮，在模拟器上面按住 F2 或者 Page Up，在 Genymotion 上面按住 ⌘+M），然后点击 `Reload JS`。
 
 在这篇教程里面我们会开发一个简单版本的电影应用，该应用可以获取电影院里面的 25 部电影，并且将它们显示在 ListView 里面。
 
@@ -145,7 +145,7 @@ var styles = StyleSheet.create({
   },
 ```
 
-我哦们使用 FlexBox 来布局－可以看看 [这篇文章](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) 来了解更多。
+我们使用 FlexBox 来布局－可以看看 [这篇文章](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) 来了解更多。
 
 在上面的代码片段里面，我们简单的增加了 `flexDirection: 'row'` ，这将会让在主容器里面的孩子节点水平的展开而不是垂直展开。
 
@@ -211,7 +211,7 @@ var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/maste
   },
 ```
 
-现在给我们的主组件增加上面是用到的 `fetchData`。这个方法将会负责处理数据的获取。你需要做的就是在解决预期的问题之后调用 `this.setState({movies: data})` 函数。因为 React 的工作方式是，`setState` 会触发一个从新渲染，之后渲染函数就会注意到 `this.state.movies` 不再为 `null`。注意我们在最后调用 `done()` －请总是确保调用 `done()` 否则任何抛出的错误信息都会被隐藏。
+现在给我们的主组件增加上面是用到的 `fetchData`。这个方法将会负责处理数据的获取。你需要做的就是在解决预期的问题之后调用 `this.setState({movies: data})` 函数。因为 React 的工作方式是：`setState` 会触发一个从新渲染，之后渲染函数就会注意到 `this.state.movies` 不再为 `null`。注意我们在最后调用 `done()` －请总是确保调用 `done()` 否则任何抛出的错误信息都会被隐藏。
 
 ```javascript
   fetchData: function() {
