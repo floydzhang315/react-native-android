@@ -1,6 +1,6 @@
-## Static Resources
+## 静态资源
 
-Over the course of a project, it is not uncommon to add and remove many images and accidentally end up shipping images you are no longer using in the app. In order to fight this, we need to find a way to know statically which images are being used in the app. To do that, we introduced a marker on require. The only allowed way to refer to an image in the bundle is to literally write `require('image!name-of-the-asset')` in the source.
+在项目的进程中，添加并且移除和处理那些在应用程序不是经常使用的图片是很常见的情况。为了解决这种情况，我们需要找到一个方法来静态地定位那些被用在应用程序里的图片。因此，我们使用了一个标记器。唯一允许的指向 bundle 里的图片的方法就是在源文件中遍历地搜索 `require('image!name-of-the-asset')` 。
 
 ```javascript
 // GOOD
@@ -15,34 +15,34 @@ var icon = this.props.active ? require('image!my-icon-active') : require('image!
 <Image source={icon} />
 ```
 
-When your entire codebase respects this convention, you're able to do interesting things like automatically packaging the assets that are being used in your app. Note that in the current form, nothing is enforced, but it will be in the future.
+当主要的代码执行到这里，你就可以做一些有趣的事情，比如自动将那些用于应用程序的 assets 打包。注意，这些代码不是强制实施的，但不代表将来也不会。
 
-### Adding Static Resources to your iOS App using Images.xcassets
+### 使用 Images.xcassets 将静态资源添加到你的 iOS 应用程序中
 
 ![](/react-native/img/StaticImageAssets.png)
 
-> **NOTE**: App build required for new resources
+> **NOTE**: 生成应用程序所需的新资源
 >
-> Any time you add a new resource to `Images.xcassets` you will need to re-build your app through Xcode before you can use it - a reload from within the simulator is not enough.
+> 无论在什么时候，您想把新的资源添加到 `Images.xcassets` 中，您都需要在使用它之前通过 Xcode 来重新构建您的应用程序 — — 在模拟器内重新加载它是不够的。
 
-*This process is currently being improved, a much better workflow will be available shortly.*
+*这一进程正在被改进，不久就会提供更好的工作流程。*
 
-### Adding Static Resources to your Android app
+### 将静态资源添加到您的 Android 应用程序中
 
-Add your images as [bitmap drawables](http://developer.android.com/guide/topics/resources/drawable-resource.html#Bitmap) to the android project (`<yourapp>/android/app/src/main/res`). To provide different resolutions of your assets, check out [using configuration qualifiers](http://developer.android.com/guide/practices/screens_support.html#qualifiers). Normally, you will want to put your assets in the following directories (create them under `res` if they don't exist):
+将您的图像作为[位图画板](http://developer.android.com/guide/topics/resources/drawable-resource.html#Bitmap)添加到 android 项目中（`<yourapp>/android/app/src/main/res`）。 为了给您的 assets 文件提供不同的分辨率，使用 [配置限定符](http://developer.android.com/guide/practices/screens_support.html#qualifiers)进行检查。 通常情况下，您将想要把您的 assets 文件放在下列目录 (如果它们不存在，那么在 `res` 下创建它们)：
 
 * `drawable-mdpi` (1x)
 * `drawable-hdpi` (1.5x)
 * `drawable-xhdpi` (2x)
 * `drawable-xxhdpi` (3x)
 
-If you're missing a resolution for your asset, Android will take the next best thing and resize it for you.
+如果您的 asset 文件丢失了一种分辨率，那么 Android 将采取下一个最好的分辨率并且为您调整它的大小。
 
-> **NOTE**: App build required for new resources
+> **NOTE**: 生成应用程序所需的新资源
 >
-> Any time you add a new resource to your drawables you will need to re-build your app by running `react-native run-android` before you can use it - reloading the JS is not enough.
+> 无论在什么时候您把新的资源添加到您的画板中您都需要在您使用它之前通过运行 `react-native run-android` 重新构建您的应用程序 - 重新加载 JS 是不够的。
 
-*This process is currently being improved, a much better workflow will be available shortly.*
+*这一进程正在被改进，不久就会提供更好的工作流程。*
 
 ## Network Resources
 
