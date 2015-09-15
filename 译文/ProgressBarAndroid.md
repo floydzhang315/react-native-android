@@ -3,7 +3,7 @@ React 组建包裹了只是 Android 部分的 `ProgressBar`。这个组件是被
 
 例子：
 
-```
+```javascript
 render: function() {
   var progressBar =
     <View style={styles.container}>
@@ -37,7 +37,7 @@ render: function() {
 
 ## 例子
 
-```
+```javascript
 'use strict';
 
 var ProgressBar = require('ProgressBarAndroid');
