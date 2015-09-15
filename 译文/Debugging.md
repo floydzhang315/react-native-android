@@ -44,3 +44,4 @@ This option allows for your JS changes to trigger automatic reload on the connec
 
 ### FPS (Frames per Second) Monitor
 On `0.5.0-rc` and higher versions, you can enable a FPS graph overlay in the developers menu in order to help you debug performance problems.
+
