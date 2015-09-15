@@ -1,18 +1,10 @@
----
-id: known-issues
-title: Known Issues
-layout: docs
-category: Guides
-permalink: docs/known-issues.html
-next: activityindicatorios
----
+###弃用的模块和原生视图
+这是 React Native Android 的首次发行，因此在 iOS 平台上出现的视图不一定都会发布在 Android 上面。我们对社区里面对下一系列模块和视图的开源代码的反馈非常感兴趣。并不是所有的视图在 iOS 和 Android 上面都有 100% 完全相同的表现，因此在这里就有必要使用一个对应的例子：在 Android 上面使用 ProgressBar，而在 iOS 上面则会使用 ActivityIndicator 来替代。
 
-###Missing Modules and Native Views
-This is an initial release of React Native Android and therefore not all of the views present on iOS are released on Android. We are very much interested in the communities' feedback on the next set of modules and views for Open Source. Not all native views between iOS and Android have a 100% equivalent representation, here it will be necessary to use a counterpart eg using ProgressBar on Android in place of ActivityIndicator on iOS. 
+我们对共同的视图和模块的临时计划包括：
 
-Our provisional plan for common views and modules includes:
+视图
 
-Views
 ```
     View Pager
     Swipe Refresh
@@ -21,7 +13,8 @@ Views
     Maps
     Webview
 ```
-Modules
+模块
+
 ```
     Geo Location
     Net Info
@@ -33,10 +26,10 @@ Modules
     Pasteboard
     Alert
 ```
-###Publishing modules on Android
-There is currently no easy way of publishing custom native modules on Android. Smooth work flow for contributors is important and this will be looked at very closely after the initial Open Source release. Of course the aim will be to streamline and optimize the process between iOS and Android as much as possible.
-###Overlay view with opacity of 0 cannot be clicked through
-There is a noted difference in the handling of Views with an opacity of 0 between iOS and Android. While iOS will allow these views to be clicked through and the View below will receive the touch input, for Android the touch will be blocked. This can be demonstrated in this example where it will only be possible to click the touchable on iOS.
+###在 Android 上发布的模块
+现在在 Android 上面发布自定义的原生模块并不是一件轻松的事。贡献者平滑稳定的工作流很重要并且这将在第一次开源版本发布之后被密切关注。当然，我们的目标是形成流水线并且尽量优化在 iOS 和 Android 平台之间的流程。
+###使用透明度为 0 来覆视图不能被点击
+在 iOS 和 Android 之间使用透明度为 0 来处理视图有一个明显的差异。虽然在 iOS 上面允许这些视图被点击并且在这些视图下面的视图也将会接收到触摸输入，但是在 Android 上面这个触摸输入则会被阻塞。这一点可以用下面的一个只能在 iOS 上面点击的例子来演示。
 
 ```
     <View style={{flex: 1}}>
@@ -53,8 +46,9 @@ There is a noted difference in the handling of Views with an opacity of 0 betwee
     </View>
 ```
 
-###Layout-only nodes on android
-An optimization feature of the Android version of React Native is for views which only contribute to the layout to not have a native view, only their layout properties are propagated to their children views. This optimization is to provide stability in deep view hierarchies for React Native and is therefore enabled by default. Should you depend on a view being present or internal tests incorrectly detect a view is layout only it will be necessary to turn off this behavior. To do this, set `collapsable` to false as in this example:
+###在 Android 上面的单独布局节点
+在 React Native 的安卓版本一个优化的特征就是对于只能贡献布局的视图不能有原生视图，只有它们的布局属性能够传递到它们的子视图。这个优化是为了给更生层次的 React Nativ 视图层提供支持，因此默认是开启的。如果你需要一个视图被呈现，或者间歇性的测试检测一个视图是不是只是布局，关闭这个行为就很有必要了。为了做到这一点，你只需要设置 `collapsable` 为 false 即可：
+
 ```
     <View collapsable={false}>
         ...
