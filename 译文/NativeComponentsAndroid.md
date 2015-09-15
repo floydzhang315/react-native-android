@@ -1,21 +1,14 @@
----
-id: native-components-android
-title: Native UI Components (Android)
-layout: docs
-category: Guides
-permalink: docs/native-components-android.html
-next: direct-manipulation
----
 
-There are tons of native UI widgets out there ready to be used in the latest apps - some of them are part of the platform, others are available as third-party libraries, and still more might be in use in your very own portfolio. React Native has several of the most critical platform components already wrapped, like `ScrollView` and `TextInput`, but not all of them, and certainly not ones you might have written yourself for a previous app. Fortunately, it's quite easy to wrap up these existing components for seamless integration with your React Native application.
 
-Like the native module guide, this too is a more advanced guide that assumes you are somewhat familiar with Android SDK programming. This guide will show you how to build a native UI component, walking you through the implementation of a subset of the existing `ImageView `component available in the core React Native library.
+这里有很多原生的 UI 部件准备被用到最新的应用程序中 - 其中一些是平台的一部分，其他的部分可以作为第三方库来使用，而且仍然还有更多的部分可能是在你自己的投资组合中使用。React Native 已经将几个最关键的平台组件进行了打包，如同 `ScrollView` 和 `TextInput`，但是并不是所有都被打包了，所以当然也不可能是您以前写的应用程序。幸运的是，通过使用 React Native 应用程序可以很容易的将现有的组件进行无缝集成打包。
 
-## ImageView example
+就如同原生模块指南，这是一个建立在假定你对 Android SDK 编程有些熟悉的基础上的更高级的指南。本指南将显示你该如何构建一个原生的 UI 组件， 帮助你遍历执行可用核心 `React Native` 库中可以使用的现有的 ImageViewcomponent 的一个子集。
 
-For this example we are going to walk through the implementation requirements to allow the use of ImageViews in JavaScript.
+## ImageView 示例
 
-Native views are created and manipulated by extending `ViewManager` or more commonly `SimpleViewManager` . A `SimpleViewManager` is convenient in this case because it applies common properties such as background color, opacity, and Flexbox layout. An example of when you would use `ViewManager` instead is when wrapping a component with FrameLayout, such as ProgressBar.
+在本例中我们将要完全了解实施要求来实现在 JavaScript 中允许使用 ImageViews。
+
+原生视图是由扩展 `ViewManage`r 或者更普遍的 `SimpleViewManager` 所创建和操纵的。在这种情况下 `SimpleViewManager` 是很方便的，因为它适用于普遍的属性，比如背景颜色、 不透明度和 Flexbox 布局。当您需要使用 `ViewManage` 的时候的一个例子是在使用 FrameLayout 进行包装组件的时候，比如 ProgressBar。
 
 These subclasses are essentially singletons - only one instance of each is created by the bridge. They vend native views to the `NativeViewHierarchyManager`, which delegates back to them to set and update the properties of the views as necessary. The `ViewManagers` are also typically the delegates for the views, sending events back to JavaScript via the bridge.
 
