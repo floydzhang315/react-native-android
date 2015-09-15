@@ -65,33 +65,33 @@ var icon = this.props.active ? require('image!my-icon-active') : require('image!
 
 iOS 的相片册可以让你将同一张图片保存为不同的尺寸，对于选择那张接近你想要尺寸的图片来说，这很重要。你不会想用一张 3264x2448 分辨率的图片作为资源来显示一个 200x200 的缩略图。如果确实有符合你要求的尺寸， React Native 会自动选择它，否则它会使用第一张比特定尺寸大 50% 的图片来避免重新定义尺寸时带来的模糊失真。这些工作 React Native 自动帮你完成了，所以你不必再自己编写乏味和容易出错的代码。
 
-## Why Not Automatically Size Everything?
+## 为什么不自动调整所有事物？
 
-*In the browser* if you don't give a size to an image, the browser is going to render a 0x0 element, download the image, and then render the image based with the correct size. The big issue with this behavior is that your UI is going to jump all around as images load, this makes for a very bad user experience.
+*在浏览器中* 如果你不给一个图像规定大小，那么浏览器会呈现一个 0x0 的元素、 随后下载图像，然后再以正确的尺寸呈现图像。这种行为最大的问题是，您的 UI 会在正在加载的图像四周跳动，这会造成一个非常糟糕的用户体验。
 
-*In React Native* this behavior is intentionally not implemented. It is more work for the developer to know the dimensions (or aspect ratio) of the remote image in advance, but we believe that it leads to a better user experience. Static images loaded from the app bundle via the `require('image!x')` syntax *can be automatically sized* because their dimensions are available immediately at the time of mounting.
+在 *React Native* 中故意不实施该行为。它的目的是让开发人员可以提前知道远程图像的尺寸 (或图形比例)，我们认为这样做的话可以实现更好的用户体验。通过使用 `require('image!x')` 语法从应用程序包中加载的静态图片可以自动的调整大小，因为它们的尺寸在安装时立即可用。
 
-For example, the result of `require('image!logo')` from the above screenshot:
+例如，上述使用 'require('image!logo')'  屏幕截图的结果：
 
 ```javascript
 {"__packager_asset":true,"isStatic":true,"path":"/Users/react/HelloWorld/iOS/Images.xcassets/react.imageset/logo.png","uri":"logo","width":591,"height":573}
 ```
 
-## Source as an object
+## Source 是一个对象类型
 
-In React Native, one interesting decision is that the `src` attribute is named `source` and doesn't take a string but an object with an `uri` attribute.
+在 React Native 中，一个有趣的决定是 `src` 特性将会被命名为 `source`，并且不作为一个字符串而是一个 `uri` 特性的对象类型。
 
 ```javascript
 <Image source={{uri: 'something.jpg'}} />
 ```
 
-On the infrastructure side, the reason is that it allows us to attach metadata to this object. For example if you are using `require('image!icon')`, then we add an `isStatic` attribute to flag it as a local file (don't rely on this fact, it's likely to change in the future!). This is also future proofing, for example we may want to support sprites at some point, instead of outputting `{uri: ...}`, we can output `{uri: ..., crop: {left: 10, top: 50, width: 20, height: 40}}` and transparently support spriting on all the existing call sites.
+站在底层来看，这样做的原因是它允许将元数据依附到这个对象中。举个例子，你正在使用 `require('image!icon')`，我们将添加 `isStatic` 作为一个 flag 来标识本地文件（不要依赖这例子，将来这可能会改变！）。这在将来同时也会成为可能，比如我们可能会支持子画面，并用它来取代输出 `{uri: ...}`，我们可以输出 `{uri: ..., crop: {left: 10, top: 50, width: 20, height: 40}}` 同时支持在所有已经存在的网站中透明地显示子画面。
 
-On the user side, this lets you annotate the object with useful attributes such as the dimension of the image in order to compute the size it's going to be displayed in. Feel free to use it as your data structure to store more information about your image.
+在用户角度上，这会让你用有用的特性比如图片的几何尺寸来注释对象类型，从而计算出将要显示出来的尺寸。尽情地使用这种数据类型来储存你的图片吧。
 
-## Background Image via Nesting
+## 背景图片叠加
 
-A common feature request from developers familiar with the web is `background-image`. To handle this use case, simply create a normal `<Image>` component and add whatever children to it you would like to layer on top of it.
+一个对于 web 开发者们很常见的需求是 `background-image`。这种情况下，创建一个简单的 `<Image>` 组件然后将它作为子 layer 添加到你想要添加的 layer 上面。
 
 ```javascript
 return (
@@ -101,6 +101,6 @@ return (
 );
 ```
 
-## Off-thread Decoding
+## 非主线程加载
 
-Image decoding can take more than a frame-worth of time. This is one of the major source of frame drops on the web because decoding is done in the main thread. In React Native, image decoding is done in a different thread. In practice, you already need to handle the case when the image is not downloaded yet, so displaying the placeholder for a few more frames while it is decoding does not require any code change.
+图片的解析会花费很多的时间。这是导致网页的帧数下降的其中一个重要的原因，因为解析工作会被执行在主线程中。在 React Native 中，图片的解析会在不同的线程中执行。在实际操作中，你已经处理好这种情况，当图片还没有下载完成，因此需要将 placeholder 显示出来，这不用你写任何代码。
