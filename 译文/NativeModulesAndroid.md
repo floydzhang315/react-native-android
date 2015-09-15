@@ -4,7 +4,7 @@
 
 ## Toast 模块
 
-这个引导将会使用这个 [Toast](http://developer.android.com/reference/android/widget/Toast.html) 的例子。我们将会可以通过使用 JavaScript 创建一个吐司消息。
+这个引导将会使用这个 [Toast](http://developer.android.com/reference/android/widget/Toast.html) 的例子。我们将会可以通过使用 JavaScript 创建一个 toast 消息。
 
 我们从创建一个原生模块开始。一个原生模块是一个通常继承 `ReactContextBaseJavaModule` 类的  Java 类，并且实现了 JavaScript 需要实现的方法。我们这里的目标是允许通过使用 JavaScript 书写 
  `ToastAndroid.show('Awesome', ToastAndroid.SHORT);`就可以在屏幕上面显示一个短短的 toast 消息。
