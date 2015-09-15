@@ -17,7 +17,7 @@
 
 ### 安装和运行 Android 原生模拟器
 
-1. 启动一个新的 shell 并且运行 `android`；在出现窗口中请检查：
+1. 启动一个新的 shell 并且运行 `android`;在出现窗口中请检查：
   * Intel x86 原生系统映像 （支持 Android 5.1.1 - API 22）
   * Intel x86 仿真器加速器 （HAXM 安装）
   ![SDK 管理器窗口](/react-native/img/AndroidSDK1.png) ![SDK 管理器窗口](/react-native/img/AndroidSDK2.png)
