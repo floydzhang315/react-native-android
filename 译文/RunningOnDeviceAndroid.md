@@ -27,3 +27,4 @@
 2. 前往 `Dev Settings`
 3. 前往 `Debug server host for device`
 4. 输入该设备的 IP 和 `Reload JS`
+
