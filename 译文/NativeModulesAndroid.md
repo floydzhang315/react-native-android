@@ -1,21 +1,13 @@
----
-id: native-modules-android
-title: Native Modules (Android)
-layout: docs
-category: Guides
-permalink: docs/native-modules-android.html
-next: native-components-ios
----
+有时候一个应用需要访问 React Native 平台目前没有对应模块的 API 。也许你需要复用一些已经存在的 Java 代码而不需要在 JavaScript 里面重新实现，或者写一些高性能，多线程的代码，比如图片处理，数据库，或者任何先进的扩展。
 
-Sometimes an app needs access to a platform API that React Native doesn't have a corresponding module for yet. Maybe you want to reuse some existing Java code without having to reimplement it in JavaScript, or write some high performance, multi-threaded code such as for image processing, a database, or any number of advanced extensions.
+我们设计了 React Native 以致于你可以写一些真正的原生代码并且可以完全拥有系统的权限的能力。这是一个更加先进的特征，并且我们不希望这是传统开发过程中的一部分，然而它存在是非常重要的。如果 React Native 不支持你需要的原生特征，那么你应该可以自己创建它。
 
-We designed React Native such that it is possible for you to write real native code and have access to the full power of the platform. This is a more advanced feature and we don't expect it to be part of the usual development process, however it is essential that it exists. If React Native doesn't support a native feature that you need, you should be able to build it yourself.
+## Toast 模块
 
-## The Toast Module
+这个引导将会使用这个 [Toast](http://developer.android.com/reference/android/widget/Toast.html) 的例子。我们将会可以通过使用 JavaScript 创建一个吐司消息。
 
-This guide will use the [Toast](http://developer.android.com/reference/android/widget/Toast.html) example. Let's say we would like to be able to create a toast message from JavaScript.
-
-We start by creating a native module. A native module is a Java class that usually extends the `ReactContextBaseJavaModule` class and implements the functionality required by the JavaScript. Our goal here is to be able to write `ToastAndroid.show('Awesome', ToastAndroid.SHORT);` from JavaScript to display a short toast on the screen.
+我们从创建一个原生模块开始。一个原生模块是一个通常继承 `ReactContextBaseJavaModule` 类的  Java 类，并且实现了 JavaScript 需要实现的方法。我们这里的目标是允许通过使用 JavaScript 书写 
+ `ToastAndroid.show('Awesome', ToastAndroid.SHORT);`就可以在屏幕上面显示一个短短的 toast 消息。
 
 ```java
 package com.facebook.react.modules.toast;
@@ -41,7 +33,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
 }
 ```
 
-`ReactContextBaseJavaModule` requires that a method called `getName` is implemented. The purpose of this method is to return the string name of the `NativeModule` which represents this class in JavaScript. So here we will call this `ToastAndroid` so that we can access it through `React.NativeModules.ToastAndroid` in JavaScript.
+`ReactContextBaseJavaModule`  需要一个叫做 `getName` 的方法被实现。这个方法的目的就是返回在 JavaScript 里面表示这个类的叫做 `NativeModule` 的字符串的名字。在这里我们调用 `ToastAndroid` 因此我们可以在 JavaScript 里面使用 `React.NativeModules.ToastAndroid` 来得到它。
 
 ```java
   @Override
@@ -50,7 +42,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
   }
 ```
 
-An optional method called `getConstants` returns the constant values exposed to JavaScript. Its implementation is not required but is very useful to key pre-defined values that need to be communicated from JavaScript to Java in sync.
+一个可选的叫做 `getConstants` 的方法会将传递给 JavaScript 的常量返回。这个方法的实现并不是必须的，但是却对在 JavaScript 和 Java 中同步的预定义的关键字的值非常重要。
 
 ```java
   @Override
@@ -62,7 +54,7 @@ An optional method called `getConstants` returns the constant values exposed to 
   }
 ```
 
-To expose a method to JavaScript a Java method must be annotated using `@ReactMethod`. The return type of bridge methods is always `void`. React Native bridge is asynchronous, so the only way to pass a result to JavaScript is by using callbacks or emitting events (see below).
+给 JavaScript 暴露一个方法，一个 Java 方法需要使用 `@ReactMethod` 来注解。桥接的方法的返回值类型总是 `void`。React Native 的桥接是异步的，因此将一个结果传递给 JavaScript 的唯一方式就是使用回调函数或者调用事件（见下面）。
 
 ```java
   @ReactMethod
@@ -71,9 +63,9 @@ To expose a method to JavaScript a Java method must be annotated using `@ReactMe
   }
 ```
 
-### Argument Types
+### 参数类型
 
-The following argument types are supported for methods annotated with `@ReactMethod` and they directly map to their JavaScript equivalents
+下面的参数类型是被使用 `@ReactMethod` 注解的方法支持的，并且它们直接对应 JavaScript 中对应的值。
 
 ```
 Boolean -> Bool
@@ -86,9 +78,9 @@ ReadableMap -> Object
 ReadableArray -> Array
 ```
 
-### Register the Module
+### 注册模块
 
-The last step within Java is to register the Module; this happens in the `createNativeModules` of your apps package. If a module is not registered it will not be available from JavaScript.
+在使用 Java 的最后一步就是注册这个模块，这将在你的应用包中的 `createNativeModules` 发生。如果一个模块没有被注册，那么它在 JavaScript 是不可用的。
 
 ```java
 class AnExampleReactPackage implements ReactPackage {
@@ -106,7 +98,7 @@ class AnExampleReactPackage implements ReactPackage {
   }
 ```
 
-The package needs to be provided to the ReactInstanceManager when it is built. See `UIExplorerActivity.java` for an example. The default package when you initialize a new project is `MainReactPackage.java`.
+当包被创建的时候，它需要提供给 ReactInstanceManager 。可以看  `UIExplorerActivity.java` 这个例子。当你初始化一个新工程的时候默认的包是`MainReactPackage.java`。
 
 ```java
 mReactInstanceManager = ReactInstanceManager.builder()
@@ -119,7 +111,7 @@ mReactInstanceManager = ReactInstanceManager.builder()
   .build();
 ```
 
-To make it simpler for to access your new functionality from JavaScript, it is common to wrap the native module in a JavaScript module. This is not necessary but saves the consumers of your library the need to pull it off of `NativeModules` each time. This JavaScript file also becomes a good location for you to add any JavaScript side functionality.
+为了能让你更加方便的从 JavaScript 访问你的新功能的时候，通常会将原生模块包裹在一个 JavaScript 模块里面。这不是必须的，但是节省了你的类库的使用者每次都要 pull  `NativeModules` 的不便。这个 JavaScript 文件也为你增加任何 JavaScript 端功能提供了方便。
 
 ```java
 /**
@@ -139,7 +131,7 @@ var { NativeModules } = require('react-native');
 module.exports = NativeModules.ToastAndroid;
 ```
 
-Now, from your JavaScript file you can call the method like this:
+现在，在你的 JavaScript 文件里面你可以像下面这样调用方法：
 
 ```js
 var ToastAndroid = require('ToastAndroid')
@@ -149,11 +141,11 @@ ToastAndroid.show('Awesome', ToastAndroid.SHORT);
 // of the @providesModule directive. Using @providesModule is optional.
 ```
 
-## Beyond Toasts
+## 远不止 Toasts
 
-### Callbacks
+### 回调
 
-Native modules also support a special kind of argument - a callback. In most cases it is used to provide the function call result to JavaScript.
+原生模块也提供了一种特殊的参数－一个回调。在大多数情况下这是给 JavaScript 返回结果使用的。
 
 ```java
 public class UIManagerModule extends ReactContextBaseJavaModule {
@@ -181,7 +173,7 @@ public class UIManagerModule extends ReactContextBaseJavaModule {
 ...
 ```
 
-This method would be accessed in JavaScript using:
+使用以下方法可以来访问在 JavaScript 里面可以使用：
 
 ```js
 UIManager.measureLayout(
@@ -196,17 +188,17 @@ UIManager.measureLayout(
 );
 ```
 
-A native module is supposed to invoke its callback only once. It can, however, store the callback and invoke it later.
+一个原生模块支持只调用一次它的回调。它可以保存这个回调，并且在以后调用。
 
-It is very important to highlight that the callback is not invoked immediately after the native function completes - remember that bridge communication is asynchronous, and this too is tied to the run loop.
+有一点需要强调的就是在原生方法完成之后这个回调并不是立即被调用的－请记住桥接通信是异步的，因此这个也在运行时循环里面。
 
-### Threading
+### 线程
 
-Native modules should not have any assumptions about what thread they are being called on, as the current assignment is subject to change in the future. If a blocking call is required, the heavy work should be dispatched to an internally managed worker thread, and any callbacks distributed from there.
+原生模块不应该设想有它们将在哪些线程里面被调用，因为目前的任务在以后改变是主要的。如果一个块调用是必须的，那么耗时操作将会被分配到间歇性的工作线程中，并且任何回调将会从这里开始。
 
-### Sending Events to JavaScript
+### 给 JavaScript 传递事件
 
-Native modules can signal events to JavaScript without being invoked directly. The easiest way to do this is to use the `RCTDeviceEventEmitter` which can be obtained from the `ReactContext` as in the code snippet below.
+原生模块可以不需要立即被调用就可以给 JavaScript 发送事件。最简单的方式就是使用从 `ReactContext` 获得的 `RCTDeviceEventEmitter`，就像下面的代码片段：
 
 ```java
 ...
@@ -223,7 +215,7 @@ WritableMap params = Arguments.createMap();
 sendEvent(reactContext, "keyboardWillShow", params);
 ```
 
-JavaScript modules can then register to receive events by `addListenerOn` using the `Subscribable` mixin
+JavaScript 模块在那时可以通过使用 `Subscribable` 的 `addListenerOn` 来注册并且接收事件。
 
 ```js
 var RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
