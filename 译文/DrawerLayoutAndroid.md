@@ -18,7 +18,7 @@ React 组件封装平台 `DrawerLayout`（仅适用于Android）。Drawer（通�
     </DrawerLayoutAndroid>
       );  
     },
- ```   
+   
 ### 属性  
                         
 <b>drawerPosition</b> enum(DrawerConsts.DrawerPosition.Left, DrawerConsts.DrawerPosition.Right)
