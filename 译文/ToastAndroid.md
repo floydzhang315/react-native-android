@@ -1,5 +1,5 @@
 
-## ToastAndroid
+# ToastAndroid
 
 它揭示了如何将本地 ToastAndroid 模块作为一个 JS 模块。它有一个名为 `showText` 的函数，其拥有的参数如下所示：
 
