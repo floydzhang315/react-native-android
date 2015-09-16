@@ -123,7 +123,7 @@ var iface = {
 module.exports = requireNativeComponent('RCTImageView', iface);
 ```
 
-`requireNativeComponent` 通常具有两个参数，第一个是本地视图的名称，第二个是描述组件接口的对象。组件接口应该声明一个友好的`名`称在调试消息中使用，并且必须声明本地视图所反映的 `propTypes`。`PropTypes` 用于检查用户使用本地视图的有效性。
+`requireNativeComponent` 通常具有两个参数，第一个是本地视图的名称，第二个是描述组件接口的对象。组件接口应该声明一个友好的`名称`在调试消息中使用，并且必须声明本地视图所反映的 `propTypes`。`PropTypes` 用于检查用户使用本地视图的有效性。
 
 #   事件
 
