@@ -1,46 +1,35 @@
----
-id: debugging
-title: Debugging
-layout: docs
-category: Guides
-permalink: docs/debugging.html
-next: testing
----
+## 调试 REACT 本地应用
+访问应用程序开发者的菜单:
 
-## Debugging React Native Apps
-To access the in-app developer menu:
+1. 在 iOS 中摇动设备或在虚拟机里按组合键 `control + ⌘ + z` .
+2. 在 Android 中摇动设备或按硬件菜单按钮 (在旧的设备中以及大多数虚拟机中都有效，例如， 在 [genymotion](https://www.genymotion.com) 中，你可以按组合键  `⌘ + m` 来模拟点击硬件菜单按钮))
 
-1. On iOS shake the device or press `control + ⌘ + z` in the simulator.
-2. On Android shake the device or press hardware menu button (available on older devices and in most of the emulators, e.g. in [genymotion](https://www.genymotion.com) you can press `⌘ + m` to simulate hardware menu button click)
+> 提示
 
-> Hint
-
-> To disable the developer menu for production builds:
+> 要禁用产品构建的开发人员菜单:
 >
-> 1. For iOS open your project in Xcode and select `Product` → `Scheme` → `Edit Scheme...` (or press `⌘ + <`). Next, select `Run` from the menu on the left and change the Build Configuration to `Release`.
-> 2. For Android, by default, developer menu will be disabled in release builds done by gradle (e.g with gralde `assembleRelease` task). Although this behavior can be customized by passing proper value to `ReactInstanceManager#setUseDeveloperSupport`.
+> 1. 在 iOS 中，打开 Xcode 中的项目，选择  `Product` → `Scheme` → `Edit Scheme...` (或按组合键 `⌘ + <`).下一步, 在左边的菜单中选择 `Run` 然后将 Build Configuration 改为 `Release`。
+> 2. 在 Android 中， 默认情况下, 由 gradle 建立发布的开发者菜单将被禁用(例如， gralde 的 `assembleRelease` 任务). 虽然这种行为可以通过传递给 `ReactInstanceManager#setUseDeveloperSupport` 正确的值来自定义。
+### 重加载
+选择 `Reload` (或者在 iOS 虚拟机中按组合键 `⌘ + r`) 将会重新加载作用于你的应用程序中的 JavaScript 。 如果你增加了新的资源 (例如，将一幅图添加到 iOS  中的 `Images.xcassets` ，或 Android 中的 `res/drawable` 文件夹) 或者对任何本地代码进行修改 ( iOS 中的 Objective-C/Swift 代码或  Android 中的 Java/C++ 代码),你将需要重新生成该应用程序以使更改生效。
+### Chrome 开发工具
+在 Chrome 中调试 JavaScript 代码，在开发者菜单选择 `Debug in Chrome` 。 将打开一个新的标签 [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui).
 
-### Reload
-Selecting `Reload` (or pressing `⌘ + r` in the iOS simulator) will reload the JavaScript that powers your application. If you have added new resources (such as an image to `Images.xcassets` on iOS or to `res/drawable` folder on Android) or modified any native code (Objective-C/Swift code on iOS or Java/C++ code on Android), you will need to re-build the app for the changes to take effect.
+在 Chrome 中，按下组合键 `⌘ + option + i` 或选择 `View` → `Developer` → `Developer Tools` 切换开发工具控制台。 启用 [捕获异常时暂停](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511) 以获得更佳的调试体验。
 
-### Chrome Developer Tools
-To debug the JavaScript code in Chrome, select `Debug in Chrome` from the developer menu. This will open a new tab at [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui).
+在实际设备上进行调试:
 
-In Chrome, press `⌘ + option + i` or select `View` → `Developer` → `Developer Tools` to toggle the developer tools console. Enable [Pause On Caught Exceptions](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511) for a better debugging experience.
+1. 在 iOS 中，- 打开文件 `RCTWebSocketExecutor.m` 并更改 `localhost` 为你的电脑IP地址。摇动设备打开开发菜单，选择启动调试。
+2. 在 Android 中， 如果你正在运行通过 USB 连接的 Android 5.0+ 设备，您可以使用 `adb` 命令行工具来从设备到您的计算机设置端口转发。 运行: `adb reverse 8081 8081` (参阅 [此链接](http://developer.android.com/tools/help/adb.html) 以获得 `adb` 命令详情). 或者，你可以打开设备上开发菜单并选择开发设置，然后为设备设置更新调试服务器主机到您的计算机的 IP 地址。
 
-To debug on a real device:
-
-1. On iOS - open the file `RCTWebSocketExecutor.m` and change `localhost` to the IP address of your computer. Shake the device to open the development menu with the option to start debugging.
-2. On Android, if you're running Android 5.0+ device connected via USB you can use `adb` command line tool to setup port forwarding from the device to your computer. For that run: `adb reverse 8081 8081` (see [this link](http://developer.android.com/tools/help/adb.html) for help on `adb` command). Alternatively, you can [open dev menu](#debugging-react-native-apps) on the device and select `Dev Settings`, then update `Debug server host for device` setting to the IP address of your computer.
-
-#### React Developer Tools (optional)
-Install the [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) extension for Google Chrome. This will allow you to navigate the component hierarchy via the `React` in the developer tools (see [facebook/react-devtools](https://github.com/facebook/react-devtools) for more information).
+#### React 开发工具 (可选)
+安装 [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) 作为谷歌浏览器的扩展.这将允许您通过 `React` 在开发工具中导航组件层次结构 ( 更多详情参阅 [facebook/react-devtools](https://github.com/facebook/react-devtools) )。
 
 ### Live Reload
-This option allows for your JS changes to trigger automatic reload on the connected device/emulator. To enable this option:
+这个选项可触发 JS 在连接设备/模拟器上自动刷新。启用此选项：
 
-1. On iOS, select `Enable Live Reload` via the developer menu to have the application automatically reload when changes are made to the JavaScript.
-2. On Android, [launch dev menu](#debugging-react-native-apps), go to `Dev Settings` and select `Auto reload on JS change` option
+1. 在 iOS 中，通过开发者菜单选择 `Enable Live Reload` ，当 JavaScript 有任何改动时，应用程序会自动重新加载。
+2. 在 Android 中，[启动开发菜单](#debugging-react-native-apps)，进入 `Dev Settings` 并选择 `Auto reload on JS change` 选项。
 
-### FPS (Frames per Second) Monitor
-On `0.5.0-rc` and higher versions, you can enable a FPS graph overlay in the developers menu in order to help you debug performance problems.
+### FPS (每秒帧数) 显示器
+在 `0.5.0-rc` 以及更高的版本，为了帮助调试性能问题，你可以在开发者菜单启用 FPS 图形叠置。
