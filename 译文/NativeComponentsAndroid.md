@@ -14,16 +14,16 @@
 
 传递一个视图很简单：
 
-1.创建 ViewManager 子类。
-2.使用  `@UIProp` 注释视图属性
-3.实现 `createViewInstance` 方法
-4.实现 `updateView` 方法
-5.在应用程序软件包中的 `createViewManagers` 中注册管理器。
-6.执行 JavaScript 模块
+1.创建 ViewManager 子类  
+2.使用  `@UIProp` 注释视图属性  
+3.实现 `createViewInstance` 方法  
+4.实现 `updateView` 方法  
+5.在应用程序软件包中的 `createViewManagers` 中注册管理器  
+6.执行 JavaScript 模块  
 
-## 1. Create the `ViewManager` subclass
+## 1. 创建 `ViewManager` 子类
 
-In this example we create view manager class `ReactImageManager` that extends `SimpleViewManager` of type `ReactImageView`. `ReactImageView` is the type of object managed by the manager, this will be the custom native view. Name returned by `getName` is used to reference the native view type from JavaScript.
+在本示例中，我们通过继承 `ReactImageView` 类型的 `SimpleViewManager` 来创建的视图管理器类 `ReactImageManager`。它是由管理器管理的对象类型，这将成为一个原生视图。通过 `getName` 返回的名字将被用来从 Javascript 中引用原生视图类型。
 
 ```java
 ...
@@ -38,9 +38,9 @@ public class ReactImageManager extends SimpleViewManager<ReactImageView> {
   }
 ```
 
-## 2. Annotate the view properties
+## 2. 注释视图属性
 
-Properties that are to be reflected in JavaScript are annotated with `@UIProp`. The types currently supported are `BOOLEAN`, `NUMBER`, `STRING`, `MAP` and `ARRAY`. Each property is declared as a public static final String and its assigned value will be the name of the property in JavaScript.
+我们在 JavaScript 中使用 `@UIProp` 来注释需要被反映出来的属性。目前支持的类型有 `BOOLEAN`, `NUMBER`, `STRING`, `MAP` 和 `ARRAY`。每个属性都被声明为公共静态最终字符串常量，并且给它们分配的值在 JavaScript 中都会成为属性的名称。
 
 ```java
   @UIProp(UIProp.Type.STRING)
@@ -51,9 +51,9 @@ Properties that are to be reflected in JavaScript are annotated with `@UIProp`. 
   public static final String PROP_RESIZE_MODE = ViewProps.RESIZE_MODE;
 ```
 
-## 3. Implement method `createViewInstance`
+## 3. 实现 `createViewInstance` 方法  
 
-Views are created in the `createViewInstance` method, the view should initialize itself in its default state, any properties will be set via a follow up call to `updateView.`
+我们使用 `CreateViewInstance` 方法来创建视图，视图应将其自身初始化到默认状态，然后任何属性都会通过后续调用 `updateView` 来进行设置。
 
 ```java
   @Override
@@ -62,9 +62,9 @@ Views are created in the `createViewInstance` method, the view should initialize
   }
 ```
 
-## 4. Implement method `updateView`
+## 4. 实现 `updateView` 方法 
 
-Setting properties on a view is not handled by automatically calling setter methods as it is on iOS; for Android, you manually invoke the setters via the `updateView` of your `ViewManager`. Values are fetched from the `CatalystStylesDiffMap` and dispatched to the `View` instance as required. It is up to a combination of `updateView` and the `View` class to check the validity of the properties and behave accordingly.
+和 iOS 中有些不同的是在 Android 中，不是通过自动调用 setter 方法来给一个视图的属性进行赋值； 对于 Android 而言，你需要通过您的 `ViewManager` 中的 `updateView` 方法手动调用 setter。从 `CatalystStylesDiffMap` 中提取出来值，并且传递给视图实例。它是通过 `updateView` 和视图类的组合来检查属性的有效性，并采取相应的行动。
 
 ```java
   @Override
