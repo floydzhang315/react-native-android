@@ -37,28 +37,27 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
 
 - `showWithText`: 布尔值，是否显示图标旁边的文本
 
-
- **logo** Image.propTypes.source 
+**logo** Image.propTypes.source 
 
     设置工具栏的标志。
 
- **navIcon ** Image.propTypes.source 
+**navIcon** Image.propTypes.source 
 
     设置导航图标。
 
- **onActionSelected ** function 
+ **onActionSelected** function 
 
     被选中时调用回调函数。传递到回调的唯一参数是操作数组中的位置。
 
- **onIconClicked ** function 
+ **onIconClicked** function 
 
     在选定图标时调用。
 
- **subtitle ** string 
+ **subtitle** string 
 
     设置工具栏副标题。
 
- **subtitleColor ** string 
+ **subtitleColor** string 
 
     设置工具栏副标题的颜色。
 
@@ -70,9 +69,10 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
 
     设置工具栏标题。
 
- **titleColor ** string 
+ **titleColor** string 
 
     设置工具栏副标题的颜色。
+
 
 ### 例子
 
