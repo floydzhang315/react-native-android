@@ -23,39 +23,39 @@ React 组件封装平台 `DrawerLayout`（仅适用于Android）。Drawer（通�
  
 ### 属性  
                         
-<b>drawerPosition</b> enum(DrawerConsts.DrawerPosition.Left, DrawerConsts.DrawerPosition.Right)
+**drawerPosition** enum(DrawerConsts.DrawerPosition.Left, DrawerConsts.DrawerPosition.Right)
 
     指定 drawer 将从屏幕的一侧滑动。
     
-<b>drawerWidth</b> number 
+**drawerWidth** number 
 
     指定 drawer 的宽度，即从窗口的边缘拉到视图更精确的宽度。
-<b>keyboardDismissMode</b> enum('none', "on-drag") 
+**keyboardDismissMode** enum('none', "on-drag") 
 
     确定键盘是否响应拖动被驳回。
     -'none' (默认值), 拖动不影响键盘。
     -'on-drag', 拖动开始，键盘被驳回。
 
-<b>onDrawerClose</b> 函数 
+**onDrawerClose** 函数 
 
     导航视图关闭时调用函数。
 
-<b>onDrawerOpen</b> 函数  
+**onDrawerOpen** 函数  
 
     导航视图打开时调用函数。
 
-<b>onDrawerSlide</b> 函数  
+**onDrawerSlide** 函数  
 
     与导航视图交互时调用函数。
 
-<b>onDrawerStateChanged</b> 函数 
+**onDrawerStateChanged** 函数 
 
     当 Drawer 状态发生变化时调用函数，drawer 有 3 种状态:
     - idle, 表示与导航视图没有交互
     - dragging,表示目前有与导航视图的交互 
     - settling, 表示有与导航视图的交互，并且导航视图正在的关闭或打开。
 
-<b>renderNavigationView</b> 函数 
+**renderNavigationView** 函数 
 
     导航图将被渲染到屏幕的一侧，并且可以拉出。
 
