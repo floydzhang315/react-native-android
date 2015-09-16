@@ -3,7 +3,7 @@
 
 它揭示了如何将本地 ToastAndroid 模块作为一个 JS 模块。它有一个名为 `showText` 的函数，其拥有的参数如下所示：
 
-1. 字符串消息: 将文本传递给 toast 的字符串
+1. 字符串消息：将文本传递给 toast 的字符串
 2. int 持续期：toast 的持续期。可能是 `ToastAndroid.SHORT` 或 `ToastAndroid.LONG`
 
 ### 方法
