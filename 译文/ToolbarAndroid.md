@@ -5,7 +5,7 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
 如果工具栏具有唯一子级，它将显示在标题和操作之间。
 
 例子：
-  ```java
+```java
     render: function() {   
       return (
         <ToolbarAndroid
@@ -20,7 +20,7 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
       if (position === 0) { // index of 'Settings'
      }
     }
-    ```
+```
 ### 属性 
 
 **actions** [{title: string, icon: Image.propTypes.source, show: enum('always', 'ifRoom', 'never'), showWithText: bool}] 
