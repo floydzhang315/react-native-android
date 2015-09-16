@@ -1,7 +1,9 @@
-#BackAndroid
-###方法
-    static exitApp() 
+# BackAndroid
 
-    static addEventListener(eventName: BackPressEventName, handler: Function) 
+### 方法
 
-    static removeEventListener(eventName: BackPressEventName, handler: Function) 
+static **exitApp()** 
+
+static **addEventListener**(eventName: BackPressEventName, handler: Function) 
+
+static **removeEventListener**(eventName: BackPressEventName, handler: Function) 
