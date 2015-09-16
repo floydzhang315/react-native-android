@@ -1,10 +1,11 @@
 ## ToolbarAndroid
+
 React 组件，包装了 Android `Toolbar` [小工具](https://developer.android.com/reference/android/support/v7/widget/Toolbar.html)。工具栏可以显示一个标志，导航图标（如汉堡包菜单），标题和副标题和操作列表。标题和子标题被扩展这样以来标志和导航图标显示在左边，标题和副标题在中间并且操作在右边。
 
 如果工具栏具有唯一子级，它将显示在标题和操作之间。
 
 例子：
-  
+  ```java
     render: function() {   
       return (
         <ToolbarAndroid
@@ -19,15 +20,16 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
       if (position === 0) { // index of 'Settings'
      }
     }
+    ```
 ### 属性 
 
 **actions** [{title: string, icon: Image.propTypes.source, show: enum('always', 'ifRoom', 'never'), showWithText: bool}] 
 
  将工具栏上的可能动作设置为动作菜单的一部分。这些都显示为图标或小部件右侧的文本。如果不适合，它们将被放置在一个'溢出'菜单。
 
-此属性需要一个对象数组，其中每个对象具有以下键:
+此属性需要一个对象数组，其中每个对象具有以下键：
 
-- `title`:<b>必要的</b>, 这个操作的标题
+- `title`:**必要的**, 这个操作的标题
 
 - `icon`: 这个操作的图标，例如： `require('image!some_icon')`
 
@@ -36,44 +38,45 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
 - `showWithText`: 布尔值，是否显示图标旁边的文本
 
 
- <b>logo</b> Image.propTypes.source 
+ **logo** Image.propTypes.source 
 
     设置工具栏的标志。
 
- <b>navIcon </b> Image.propTypes.source 
+ **navIcon ** Image.propTypes.source 
 
     设置导航图标。
 
- <b>onActionSelected </b> function 
+ **onActionSelected ** function 
 
     被选中时调用回调函数。传递到回调的唯一参数是操作数组中的位置。
 
- <b>onIconClicked </b> function 
+ **onIconClicked ** function 
 
     在选定图标时调用。
 
- <b>subtitle </b> string 
+ **subtitle ** string 
 
     设置工具栏副标题。
 
- <b>subtitleColor </b> string 
+ **subtitleColor ** string 
 
     设置工具栏副标题的颜色。
 
- <b>testID</b> string 
+ **testID** string 
 
     用于在端到端测试中查找此视图。
 
- <b>title</b> string 
+ **title** string 
 
     设置工具栏标题。
 
- <b>titleColor </b> string 
+ **titleColor ** string 
 
     设置工具栏副标题的颜色。
 
-###例子
+### 例子
 
+```java
     'use strict';
 
     var React = require('react-native');
@@ -178,4 +181,4 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
     });
 
     module.exports = ToolbarAndroidExample;
-
+```
