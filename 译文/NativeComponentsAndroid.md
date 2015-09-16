@@ -8,18 +8,18 @@
 
 在本例中我们将要完全了解实施要求来实现在 JavaScript 中允许使用 ImageViews。
 
-原生视图是由扩展 `ViewManage`r 或者更普遍的 `SimpleViewManager` 所创建和操纵的。在这种情况下 `SimpleViewManager` 是很方便的，因为它适用于普遍的属性，比如背景颜色、 不透明度和 Flexbox 布局。当您需要使用 `ViewManage` 的时候的一个例子是在使用 FrameLayout 进行包装组件的时候，比如 ProgressBar。
+原生视图是由扩展 `ViewManage` 或者更普遍的 `SimpleViewManager` 所创建和操纵的。在这种情况下 `SimpleViewManager` 是很方便的，因为它适用于普遍的属性，比如背景颜色、 不透明度和 Flexbox 布局。当然也有其他例子,当您在使用 FrameLayout 进行包装组件的时候，那么这时候您需要使用 `ViewManage` ，比如 ProgressBar。
 
-These subclasses are essentially singletons - only one instance of each is created by the bridge. They vend native views to the `NativeViewHierarchyManager`, which delegates back to them to set and update the properties of the views as necessary. The `ViewManagers` are also typically the delegates for the views, sending events back to JavaScript via the bridge.
+这些子类在本质上是很单一的 — — 每个子类之中只有一个实例是通过这个桥接器创建的。他们将原生视图传递到了 `NativeViewHierarchyManager` 之中，这代表回到了通过使用它们原始的方法来设置并更新这些必要的视图的属性。`ViewManagers` 通常也是这些视图的代表，它通过该桥接器将事件发送回 JavaScript。
 
-Vending a view is simple:
+传递一个视图很简单：
 
-1. Create the ViewManager subclass.
-2. Annotate the view properties with `@UIProp`
-3. Implement the `createViewInstance` method
-4. Implement the `updateView` method
-5. Register the manager in `createViewManagers` of the applications package.
-6. Implement the JavaScript module
+1.创建 ViewManager 子类。
+2.使用  `@UIProp` 注释视图属性
+3.实现 `createViewInstance` 方法
+4.实现 `updateView` 方法
+5.在应用程序软件包中的 `createViewManagers` 中注册管理器。
+6.执行 JavaScript 模块
 
 ## 1. Create the `ViewManager` subclass
 
