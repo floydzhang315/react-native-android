@@ -1,22 +1,23 @@
 ## SwitchAndroid
 标准的 Android 双态切换组件
+
 ### 属性  
 
-    **disabled** bool 
+**disable** tool
 
-    如果为 true，则该组件不能进行交互。
+如果为 true，则该组件不能进行交互。
 
-    **onValueChange** function 
+**onValueChange** function 
 
-    当值发生变化时调用新的值。
+当值发生变化时调用新的值。
 
-    **testID** string 
+**testID** string 
 
-    用于在端到端测试中查找此视图。
+用于在端到端测试中查找此视图。
  
-    **value** bool 
+**value** bool 
 
-    开关的布尔值。
+开关的布尔值。
 
 ### 例子
 
