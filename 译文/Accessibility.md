@@ -96,3 +96,21 @@
 - **none** 辅助功能服务不应该对此视图通知改变的地方。
 - **polite** 辅助功能服务应该对此视图通知改变的地方。
 - **assertive** 辅助功能服务应该中断正在进行的会话，并且以立即宣布该视图的改变。
+
+```java
+<TouchableWithoutFeedback onPress={this._addOne}>
+  <View style={styles.embedded}>
+    <Text>Click me</Text>
+  </View>
+</TouchableWithoutFeedback>
+<Text accessibilityLiveRegion="polite">
+  Clicked {this.state.count} times
+</Text>
+```
+
+在上面的示例方法 _addOne 更改了 state.count 变量。当最终用户单击 TouchableWithoutFeedback 的时候，因为 TalkBack 的  'accessibilityLiveRegion=”polite”' 属性，所以它读取了文本视图中的文本。
+
+#### importantForAccessibility (Android)
+
+对于两个重叠的并且拥有相同父元素的 UI 组件，默认的辅助功能焦点可以有不可预知的行为。如果一个视图触发辅助事件并且它被汇报给了辅助功能服务器，那么 'ImportantForAccessibility'  属性将会通过控制解决它，它可以设置为 '汽车'，'是的'，'不' 和 'no-隐藏-后代' (最后一个值将迫使辅助功能服务忽略该组件和它的所有子)。
+
