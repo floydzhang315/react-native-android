@@ -31,7 +31,7 @@ renderImages: function() {
 **source** {uri: string}，编号
 `uri` 是一个代表图片资源标识符的字符串，它可以是 http 地址、 本地文件路径或静态图像资源的名称 (它被包含在 `require('image!name')` 函数中) 。
 
-**style** 样式
+**style** 样式  
        [**Flexbox**......](http://facebook.github.io/react-native/docs/flexbox.html#proptypes)  
        [**Transforms**...](http://facebook.github.io/react-native/docs/transforms.html#proptypes)  
        **resizeMode** Object.keys(ImageResizeMode)   
