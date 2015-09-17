@@ -18,7 +18,7 @@
 
 在 Android 系统中，在 react-native  视图中 ' accessible={true}' 属性将被翻译成本地命令 ' focusable={true}'。
 
-```android
+```java
 <View accessible={true}>
   <Text>text one</Text>
   <Text >text two</Text>
@@ -33,7 +33,7 @@
 
 若要使用它，在您的视图中将 accessibilityLabel 属性设置为一个自定义的字符串：
 
-```android
+```java
 <TouchableOpacity accessible={true} accessibilityLabel={'Tap me!'} onPress={this._onPress}>
   <View style={styles.button}>
     <Text style={styles.buttonText}>Press me!</Text>
