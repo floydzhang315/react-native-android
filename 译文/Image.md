@@ -1,4 +1,80 @@
-# 图像
+# 图片
+
+一个 react 的组件用以显示不同类型的图片，包括网络图片，静态资源，临时的本地图片，还有本地磁盘的图片，比如手机照片。
+
+举例：
+
+```java
+renderImages: function() {
+  return (
+    <View>
+      <Image
+        style={styles.icon}
+        source={require('image!myIcon')}
+      />
+      <Image
+        style={styles.logo}
+        source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}}
+      />
+    </View>
+  );
+},
+```
+### 支撑工具
+
+**onLayout** 函数  
+在进行装载和布局改变的时候使用`{nativeEvent: {layout: {x, y, width, height}}}`调用。
+
+**resizeMode** 枚举 ('cover', 'contain', 'stretch')  
+当帧与原始图像尺寸不匹配时用于确定如何调整图像的大小。
+
+**source** {uri: string}，编号
+`uri` 是一个代表图片资源标识符的字符串，它可以是 http 地址、 本地文件路径或静态图像资源的名称 (它被包含在 `require('image!name')` 函数中) 。
+
+**style** 样式
+       [**Flexbox**......](http://facebook.github.io/react-native/docs/flexbox.html#proptypes)  
+       [**Transforms**...](http://facebook.github.io/react-native/docs/transforms.html#proptypes)  
+       **resizeMode** Object.keys(ImageResizeMode)   
+       **backgroundColor** 字符串  
+       **borderColor** 字符串  
+       **borderWidth** 数字  
+       **borderRadius** 数字  
+       **overflow** 枚举('visible', 'hidden')  
+       **tintColor** 字符串  
+       **opacity** 数字  
+
+**testID** 字符串
+一个在 UI 自动测试脚本中使用此元素的唯一标识符。
+
+`ios` **accessibilityLabel** 字符串 
+
+在用户与图像交互时，该文本会由屏幕阅读器读取。 
+
+`ios` **accessible** 布尔值  
+当为 true 的时候，指示图像是可访问的元素。
+
+`ios` **capInsets**  {top: number, left: number, bottom: number, right: number}  
+当图像的大小被重新调整时，由 capInsets 指定的角落的大小将保持在一个固定的值，但中心内容和图像的边界将被拉伸。这用于创建可调整大小的圆形按钮、 阴影和其他可调整大小的资源。更多关于[苹果的文档](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets)请点击此处。
+
+`ios` **defaultSource** {uri: string}  
+在下载最终图像并且网络断开的时候用来显示的静态图像。
+
+`ios` **onError** 函数  
+在加载错误的时候使用 `{nativeEvent: {error}}` 进行调用。
+
+`ios` **onLoadEndr** 函数  
+当完全加载成功时进行调用。
+
+`ios` **onLoadEnd** 函数  
+不管加载成功还是失败都会调用。
+
+`ios` **onLoadStart** 函数  
+加载成功的时候调用。
+
+`ios` **onProgress** 函数  
+在下载进程中使用 `{nativeEvent: {loaded, total}}` 进行调用。
+
+### 描述
 
 ## 静态资源
 
@@ -93,7 +169,7 @@ iOS 的相片册可以让你将同一张图片保存为不同的尺寸，对于�
 
 ## 背景图片叠加
 
-一个对于 Web 开发者们很常见的需求是 `background-image`。这种情况下，创建一个简单的 `<Image>` 组件然后将它作为子 layer 添加到你想要添加的 layer 上面。
+一个对于 web 开发者们很常见的需求是 `background-image`。这种情况下，创建一个简单的 `<Image>` 组件然后将它作为子 layer 添加到你想要添加的 layer 上面。
 
 ```javascript
 return (
@@ -106,3 +182,397 @@ return (
 ## 非主线程加载
 
 图片的解析会花费很多的时间。这是导致网页的帧数下降的其中一个重要的原因，因为解析工作会被执行在主线程中。在 React Native 中，图片的解析会在不同的线程中执行。在实际操作中，你已经处理好这种情况，当图片还没有下载完成，因此需要将 placeholder 显示出来，这不用你写任何代码。
+
+### 举例
+
+```java
+'use strict';
+
+var React = require('react-native');
+var {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicatorIOS
+} = React;
+
+var ImageCapInsetsExample = require('./ImageCapInsetsExample');
+
+var NetworkImageExample = React.createClass({
+  watchID: (null: ?number),
+
+  getInitialState: function() {
+    return {
+      error: false,
+      loading: false,
+      progress: 0
+    };
+  },
+  render: function() {
+    var loader = this.state.loading ?
+      <View style={styles.progress}>
+        <Text>{this.state.progress}%</Text>
+        <ActivityIndicatorIOS style={{marginLeft:5}}/>
+      </View> : null;
+    return this.state.error ?
+      <Text>{this.state.error}</Text> :
+      <Image
+        source={this.props.source}
+        style={[styles.base, {overflow: 'visible'}]}
+        onLoadStart={(e) => this.setState({loading: true})}
+        onError={(e) => this.setState({error: e.nativeEvent.error, loading: false})}
+        onProgress={(e) => this.setState({progress: Math.round(100 * e.nativeEvent.loaded / e.nativeEvent.total)})}
+        onLoad={() => this.setState({loading: false, error: false})}>
+        {loader}
+      </Image>;
+  }
+});
+
+exports.displayName = (undefined: ?string);
+exports.framework = 'React';
+exports.title = '<Image>';
+exports.description = 'Base component for displaying different types of images.';
+
+exports.examples = [
+  {
+    title: 'Plain Network Image',
+    description: 'If the `source` prop `uri` property is prefixed with ' +
+    '"http", then it will be downloaded from the network.',
+    render: function() {
+      return (
+        <Image
+          source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}}
+          style={styles.base}
+        />
+      );
+    },
+  },
+  {
+    title: 'Plain Static Image',
+    description: 'Static assets should be required by prefixing with `image!` ' +
+      'and are located in the app bundle.',
+    render: function() {
+      return (
+        <View style={styles.horizontal}>
+          <Image source={require('image!uie_thumb_normal')} style={styles.icon} />
+          <Image source={require('image!uie_thumb_selected')} style={styles.icon} />
+          <Image source={require('image!uie_comment_normal')} style={styles.icon} />
+          <Image source={require('image!uie_comment_highlighted')} style={styles.icon} />
+        </View>
+      );
+    },
+  },
+  {
+    title: 'Error Handler',
+    render: function() {
+      return (
+        <NetworkImageExample source={{uri: 'http://TYPO_ERROR_facebook.github.io/react/img/logo_og.png'}} />
+      );
+    },
+    platform: 'ios',
+  },
+  {
+    title: 'Image Download Progress',
+    render: function() {
+      return (
+        <NetworkImageExample source={{uri: 'http://facebook.github.io/origami/public/images/blog-hero.jpg?r=1'}}/>
+      );
+    },
+    platform: 'ios',
+  },
+  {
+    title: 'Border Color',
+    render: function() {
+      return (
+        <View style={styles.horizontal}>
+          <Image
+            source={smallImage}
+            style={[
+              styles.base,
+              styles.background,
+              {borderWidth: 3, borderColor: '#f099f0'}
+            ]}
+          />
+        </View>
+      );
+    },
+    platform: 'ios',
+  },
+  {
+    title: 'Border Width',
+    render: function() {
+      return (
+        <View style={styles.horizontal}>
+          <Image
+            source={smallImage}
+            style={[
+              styles.base,
+              styles.background,
+              {borderWidth: 5, borderColor: '#f099f0'}
+            ]}
+          />
+        </View>
+      );
+    },
+    platform: 'ios',
+  },
+  {
+    title: 'Border Radius',
+    render: function() {
+      return (
+        <View style={styles.horizontal}>
+          <Image
+            style={[styles.base, {borderRadius: 5}]}
+            source={fullImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {borderRadius: 19}]}
+            source={fullImage}
+          />
+        </View>
+      );
+    },
+  },
+  {
+    title: 'Background Color',
+    render: function() {
+      return (
+        <View style={styles.horizontal}>
+          <Image source={smallImage} style={styles.base} />
+          <Image
+            style={[
+              styles.base,
+              styles.leftMargin,
+              {backgroundColor: 'rgba(0, 0, 100, 0.25)'}
+            ]}
+            source={smallImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {backgroundColor: 'red'}]}
+            source={smallImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {backgroundColor: 'black'}]}
+            source={smallImage}
+          />
+        </View>
+      );
+    },
+  },
+  {
+    title: 'Opacity',
+    render: function() {
+      return (
+        <View style={styles.horizontal}>
+          <Image
+            style={[styles.base, {opacity: 1}]}
+            source={fullImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {opacity: 0.8}]}
+            source={fullImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {opacity: 0.6}]}
+            source={fullImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {opacity: 0.4}]}
+            source={fullImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {opacity: 0.2}]}
+            source={fullImage}
+          />
+          <Image
+            style={[styles.base, styles.leftMargin, {opacity: 0}]}
+            source={fullImage}
+          />
+        </View>
+      );
+    },
+  },
+  {
+    title: 'Nesting',
+    render: function() {
+      return (
+        <Image
+          style={{width: 60, height: 60, backgroundColor: 'transparent'}}
+          source={fullImage}>
+          <Text style={styles.nestedText}>
+            React
+          </Text>
+        </Image>
+      );
+    },
+  },
+  {
+    title: 'Tint Color',
+    description: 'The `tintColor` style prop changes all the non-alpha ' +
+      'pixels to the tint color.',
+    render: function() {
+      return (
+        <View>
+          <View style={styles.horizontal}>
+            <Image
+              source={require('image!uie_thumb_normal')}
+              style={[styles.icon, {borderRadius: 5, tintColor: '#5ac8fa' }]}
+            />
+            <Image
+              source={require('image!uie_thumb_normal')}
+              style={[styles.icon, styles.leftMargin, {borderRadius: 5, tintColor: '#4cd964' }]}
+            />
+            <Image
+              source={require('image!uie_thumb_normal')}
+              style={[styles.icon, styles.leftMargin, {borderRadius: 5, tintColor: '#ff2d55' }]}
+            />
+            <Image
+              source={require('image!uie_thumb_normal')}
+              style={[styles.icon, styles.leftMargin, {borderRadius: 5, tintColor: '#8e8e93' }]}
+            />
+          </View>
+          <Text style={styles.sectionText}>
+            It also works with downloaded images:
+          </Text>
+          <View style={styles.horizontal}>
+            <Image
+              source={smallImage}
+              style={[styles.base, {borderRadius: 5, tintColor: '#5ac8fa' }]}
+            />
+            <Image
+              source={smallImage}
+              style={[styles.base, styles.leftMargin, {borderRadius: 5, tintColor: '#4cd964' }]}
+            />
+            <Image
+              source={smallImage}
+              style={[styles.base, styles.leftMargin, {borderRadius: 5, tintColor: '#ff2d55' }]}
+            />
+            <Image
+              source={smallImage}
+              style={[styles.base, styles.leftMargin, {borderRadius: 5, tintColor: '#8e8e93' }]}
+            />
+          </View>
+        </View>
+      );
+    },
+  },
+  {
+    title: 'Resize Mode',
+    description: 'The `resizeMode` style prop controls how the image is ' +
+      'rendered within the frame.',
+    render: function() {
+      return (
+        <View style={styles.horizontal}>
+          <View>
+            <Text style={[styles.resizeModeText]}>
+              Contain
+            </Text>
+            <Image
+              style={styles.resizeMode}
+              resizeMode={Image.resizeMode.contain}
+              source={fullImage}
+            />
+          </View>
+          <View style={styles.leftMargin}>
+            <Text style={[styles.resizeModeText]}>
+              Cover
+            </Text>
+            <Image
+              style={styles.resizeMode}
+              resizeMode={Image.resizeMode.cover}
+              source={fullImage}
+            />
+          </View>
+          <View style={styles.leftMargin}>
+            <Text style={[styles.resizeModeText]}>
+              Stretch
+            </Text>
+            <Image
+              style={styles.resizeMode}
+              resizeMode={Image.resizeMode.stretch}
+              source={fullImage}
+            />
+          </View>
+        </View>
+      );
+    },
+  },
+  {
+    title: 'Animated GIF',
+    render: function() {
+      return (
+        <Image
+          style={styles.gif}
+          source={{uri: 'http://38.media.tumblr.com/9e9bd08c6e2d10561dd1fb4197df4c4e/tumblr_mfqekpMktw1rn90umo1_500.gif'}}
+        />
+      );
+    },
+    platform: 'ios',
+  },
+  {
+    title: 'Cap Insets',
+    description:
+      'When the image is resized, the corners of the size specified ' +
+      'by capInsets will stay a fixed size, but the center content and ' +
+      'borders of the image will be stretched. This is useful for creating ' +
+      'resizable rounded buttons, shadows, and other resizable assets.',
+    render: function() {
+      return <ImageCapInsetsExample />;
+    },
+    platform: 'ios',
+  },
+];
+
+var fullImage = {uri: 'http://facebook.github.io/react/img/logo_og.png'};
+var smallImage = {uri: 'http://facebook.github.io/react/img/logo_small_2x.png'};
+
+var styles = StyleSheet.create({
+  base: {
+    width: 38,
+    height: 38,
+  },
+  progress: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: 100
+  },
+  leftMargin: {
+    marginLeft: 10,
+  },
+  background: {
+    backgroundColor: '#222222'
+  },
+  sectionText: {
+    marginVertical: 6,
+  },
+  nestedText: {
+    marginLeft: 12,
+    marginTop: 20,
+    backgroundColor: 'transparent',
+    color: 'white'
+  },
+  resizeMode: {
+    width: 90,
+    height: 60,
+    borderWidth: 0.5,
+    borderColor: 'black'
+  },
+  resizeModeText: {
+    fontSize: 11,
+    marginBottom: 3,
+  },
+  icon: {
+    width: 15,
+    height: 15,
+  },
+  horizontal: {
+    flexDirection: 'row',
+  },
+  gif: {
+    flex: 1,
+    height: 200,
+  },
+});
+```
