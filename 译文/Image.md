@@ -1,3 +1,81 @@
+# 图片
+
+一个 react 的组件用以显示不同类型的图片，包括网络图片，静态资源，临时的本地图片，还有本地磁盘的图片，比如手机照片。
+
+举例：
+
+```java
+renderImages: function() {
+  return (
+    <View>
+      <Image
+        style={styles.icon}
+        source={require('image!myIcon')}
+      />
+      <Image
+        style={styles.logo}
+        source={{uri: 'http://facebook.github.io/react/img/logo_og.png'}}
+      />
+    </View>
+  );
+},
+```
+### 支撑工具
+
+**onLayout** 函数  
+在进行装载和布局改变的时候使用`{nativeEvent: {layout: {x, y, width, height}}}`调用。
+
+**resizeMode** 枚举 ('cover', 'contain', 'stretch')  
+当帧与原始图像尺寸不匹配时用于确定如何调整图像的大小。
+
+**source** {uri: string}，编号
+`uri` 是一个代表图片资源标识符的字符串，它可以是 http 地址、 本地文件路径或静态图像资源的名称 (它被包含在 `require('image!name')` 函数中) 。
+
+**style** 样式
+       [**Flexbox**......](http://facebook.github.io/react-native/docs/flexbox.html#proptypes)  
+       [**Transforms**...](http://facebook.github.io/react-native/docs/transforms.html#proptypes)  
+       **resizeMode** Object.keys(ImageResizeMode)   
+       **backgroundColor** 字符串  
+       **borderColor** 字符串  
+       **borderWidth** 数字  
+       **borderRadius** 数字  
+       **overflow** 枚举('visible', 'hidden')  
+       **tintColor** 字符串  
+       **opacity** 数字  
+
+**testID** 字符串
+一个在 UI 自动测试脚本中使用此元素的唯一标识符。
+
+`ios` **accessibilityLabel** 字符串 
+
+在用户与图像交互时，该文本会由屏幕阅读器读取。 
+
+`ios` **accessible** 布尔值  
+当为 true 的时候，指示图像是可访问的元素。
+
+`ios` **capInsets**  {top: number, left: number, bottom: number, right: number}  
+当图像的大小被重新调整时，由 capInsets 指定的角落的大小将保持在一个固定的值，但中心内容和图像的边界将被拉伸。这用于创建可调整大小的圆形按钮、 阴影和其他可调整大小的资源。更多关于[苹果的文档](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets)请点击此处。
+
+`ios` **defaultSource** {uri: string}  
+在下载最终图像并且网络断开的时候用来显示的静态图像。
+
+`ios` **onError** 函数  
+在加载错误的时候使用 `{nativeEvent: {error}}` 进行调用。
+
+`ios` **onLoadEndr** 函数  
+当完全加载成功时进行调用。
+
+`ios` **onLoadEnd** 函数  
+不管加载成功还是失败都会调用。
+
+`ios` **onLoadStart** 函数  
+加载成功的时候调用。
+
+`ios` **onProgress** 函数  
+在下载进程中使用 `{nativeEvent: {loaded, total}}` 进行调用。
+
+### 描述
+
 ## 静态资源
 
 在项目的进程中，添加并且移除和处理那些在应用程序不是经常使用的图片是很常见的情况。为了处理这种情况，我们需要找到一个方法来静态地定位那些被用在应用程序里的图片。因此，我们使用了一个标记器。唯一允许的指向 bundle 里的图片的方法就是在源文件中遍历地搜索 `require('image!name-of-the-asset')` 。
