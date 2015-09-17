@@ -48,18 +48,18 @@
 
 如果要使用它，请把 accessibilityTraits 属性设置为 accessibilityTraits 辅助功能字符串(或数组)之一：
 
-- **none** Used when the element has no traits.
-- **button** Used when the element should be treated as a button.
-- **link** Used when the element should be treated as a link.
-- **header** Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
-- **search** Used when the text field element should also be treated as a search field.
-- **image** Used when the element should be treated as an image. Can be combined with button or link, for example.
-- **selected** Used when the element is selected. For example, a selected row in a table or a selected button within a segmented control.
-- **plays** Used when the element plays its own sound when activated.
-- **key** Used when the element acts as a keyboard key.
-- **text** Used when the element should be treated as static text that cannot change.
-- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches. For example, when Weather first launches, the element with today's weather conditions is marked with this trait.
-- **disabled** Used when the control is not enabled and does not respond to user input.
+- **none** 单元素没有特征的时候使用。
+- **button** 当元素需要被当做一个按钮的时候使用。
+- **link** 当元素需要被当做链接的时候使用。
+- **header** 当元素作为内容部分的标题 (如导航栏中的标题) 的时候使用。
+- **search** 当文本字段元素也被视为一个搜索字段的时候使用。
+- **image** 当元素需要被作为图像，比如和按钮和链接结合的时候使用。
+- **selected** 当该元素被选中时使用。例如，表中被选中的行或者分段控件中选中的按钮。
+- **plays** 当元素被激活的并且播放自己的声音的时候使用。
+- **key** 当元素充当键盘按键的时候使用。
+- **text** 当元素应该被视为不能更改的静态文本的时候使用。
+- **summary** 当在应用程序首次启动的时候，该元素可以提供应用程序的实时状况的摘要的时候使用。例如，当关于天气的应用程序首次启动的时候，带有当天天气信息的元素将被该特征所标记。
+- **disabled** 当控件未启动并且对用户的输入无响应的时候使用。
 - **frequentUpdates** Used when the element frequently updates its label or value, but too often to send notifications. Allows an accessibility client to poll for changes. A stopwatch would be an example.
 - **startsMedia** Used when activating an element starts a media session (e.g. playing a movie, recording audio) that should not be interrupted by output from an assistive technology, like VoiceOver.
 - **adjustable** Used when an element can be "adjusted" (e.g. a slider).
