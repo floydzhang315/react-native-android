@@ -112,5 +112,49 @@
 
 #### importantForAccessibility (Android)
 
-对于两个重叠的并且拥有相同父元素的 UI 组件，默认的辅助功能焦点可以有不可预知的行为。如果一个视图触发辅助事件并且它被汇报给了辅助功能服务器，那么 'ImportantForAccessibility'  属性将会通过控制解决它，它可以设置为 '汽车'，'是的'，'不' 和 'no-隐藏-后代' (最后一个值将迫使辅助功能服务忽略该组件和它的所有子)。
+对于两个重叠的并且拥有相同父元素的 UI 组件，默认的辅助功能焦点可以有不可预知的行为。如果一个视图触发辅助事件并且它被汇报给了辅助功能服务器，那么 'ImportantForAccessibility'  属性将会通过控制解决它，它可以被设置为‘auto’, ‘yes’, ‘no’ 以及 ‘no-hide-descendants’ (最后一个值将迫使辅助功能服务忽略该组件和它的所有子元素)。
 
+```java
+<View style={styles.container}>
+  <View style={{position: 'absolute', left: 10, top: 10, right: 10, height: 100,
+    backgroundColor: 'green'}} importantForAccessibility=”yes”>
+    <Text> First layout </Text>
+  </View>
+  <View style={{position: 'absolute', left: 10, top: 10, right: 10, height: 100,
+    backgroundColor: 'yellow'}} importantForAccessibility=”no-hide-descendant”>
+    <Text> Second layout </Text>
+  </View>
+</View>
+```
+
+在上面的示例中，对于 TalkBack 以及其他的辅助功能服务而言，黄色的布局及其后代是完全不可见的。所以我们可以很容易地使用重叠视图没有混乱对讲同一个父。所以我们可以容易的使用来自于同一个父元素并且不带有令人疑惑的 TalkBack 的视图。
+
+### 发送辅助功能时间（Android）
+
+有时候在 UI 组件中去触发一个辅助功能事件很有用 (即当一个自定义的视图在屏幕上显示或自定义单选按钮已被选中)。为了达到这个目的，本地 UIManager 模块公布了一个名叫 'sendAccessibilityEvent' 的方法。它拥有两个参数： 视图标签和一个类型的事件。
+
+```java
+_onPress: function() {
+  this.state.radioButton = this.state.radioButton === “radiobutton_checked” ?
+  “radiobutton_unchecked” : “radiobutton_checked”;
+  if (this.state.radioButton === “radiobutton_checked”) {
+    RCTUIManager.sendAccessibilityEvent(
+      React.findNodeHandle(this),
+      RCTUIManager.AccessibilityEventTypes.typeViewClicked);
+  }
+}
+
+<CustomRadioButton
+  accessibleComponentType={this.state.radioButton}
+  onPress={this._onPress}/>
+```
+
+在上面的例子中，我们创建了一个如同本按钮的自定义单选按钮。更具体地说，TalkBack 可以正确的公布单选按钮选择的变化。
+
+## 测试 VoiceOver 支持的内容（iOS）
+
+如果要启用 VoiceOver，那么请在你的 iOS 设备上打开设置应用程序的位置。点击 General，然后点击 Accessibility。那里你会发现许多人们用来优化他们的设备的工具，比如如粗体文本、 增加的对比度以及 VoiceOver。
+
+如果要启用 VoiceOver，点击  "Vision" 下的VoiceOver，打开显示在顶部的开关。
+
+在辅助功能设置的最底部，还有一个"辅助功能的快捷方式"。你可以使用它三次单击主页按钮来触发 VoiceOver。
