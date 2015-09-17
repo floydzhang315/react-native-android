@@ -40,3 +40,28 @@
   </View>
 </TouchableOpacity>
 ```
+在上面的示例中，TouchableOpacity 元素中的 `accessibilityLabel` 会被默认的设置为 "点击我！"。 该标签是通过使用空格符来串联所有文本节点子元素构造的。
+
+#### accessibilityTraits (iOS) 
+
+辅助功能特征告诉人们他们在使用 VoiceOver 的时候选择了什么元素。此元素是一个标签？一个按钮？还是标头？ `accessibilityTraits` 将会回答这些问题。
+
+如果要使用它，请把 accessibilityTraits 属性设置为 accessibilityTraits 辅助功能字符串(或数组)之一：
+
+- **none** Used when the element has no traits.
+- **button** Used when the element should be treated as a button.
+- **link** Used when the element should be treated as a link.
+- **header** Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
+- **search** Used when the text field element should also be treated as a search field.
+- **image** Used when the element should be treated as an image. Can be combined with button or link, for example.
+- **selected** Used when the element is selected. For example, a selected row in a table or a selected button within a segmented control.
+- **plays** Used when the element plays its own sound when activated.
+- **key** Used when the element acts as a keyboard key.
+- **text** Used when the element should be treated as static text that cannot change.
+- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches. For example, when Weather first launches, the element with today's weather conditions is marked with this trait.
+- **disabled** Used when the control is not enabled and does not respond to user input.
+- **frequentUpdates** Used when the element frequently updates its label or value, but too often to send notifications. Allows an accessibility client to poll for changes. A stopwatch would be an example.
+- **startsMedia** Used when activating an element starts a media session (e.g. playing a movie, recording audio) that should not be interrupted by output from an assistive technology, like VoiceOver.
+- **adjustable** Used when an element can be "adjusted" (e.g. a slider).
+- **allowsDirectInteraction** Used when an element allows direct touch interaction for VoiceOver users (for example, a view representing a piano keyboard).
+- **pageTurn** Informs VoiceOver that it should scroll to the next page when it finishes reading the contents of the element.
