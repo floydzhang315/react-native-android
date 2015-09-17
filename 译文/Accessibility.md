@@ -65,3 +65,15 @@
 - **adjustable** 当元素可以被"调整"的时候使用(例如滑块)。
 - **allowsDirectInteraction** 当元素允许 VoiceOver 用户直接进行触摸互动的时候使用(例如，表示一个钢琴键盘的视图)。
 - **pageTurn** 当它完成阅读的元素的内容时候通知 VoiceOver 需要滚动到下一个页面。
+
+#### onAccessibilityTap (iOS)
+
+使用此属性来分配一个自定义的函数，当有人在一个可访问元素被选中的时候通过双击来激活它的时候来调用该函数。
+
+#### onMagicTap (iOS) 
+
+当有人使用 “magic tap”手势，即：用两个手指双击的时候，该属性就会被分配给一个自定义函数，同时，这个函数会被调用。一个魔法敲击函数应该执行用户可以在组件中找到的最具有相关性的操作。在 iPhone 的手机应用程序中，一个魔法敲击可以接听或者结束一个电话。如果所选的元素不具有 `onMagicTap` 功能，该系统将遍历视图层次结构直到它找到一个拥有此功能的视图。
+
+#### accessibilityComponentType (Android) 
+
+在某些情况下，我们也要提醒选定的组件类型的最终用户 (即，它是一个"按钮")。如果我们正在使用本机的按钮，那么它会自动工作。由于我们使用的是 javascript，所以我们需要为  TalkBack 提供更多的语境。为了达到这个目的，您必须为所有 UI 组件指定 'accessibilityComponentType' 属性。例如，我们支持 'button'，'radiobutton_checked' 和 'radiobutton_unchecked'等。
