@@ -1,3 +1,5 @@
+# 在设备上运行(Android)
+
 ## USB 调试
 
 在设备上开发最简单的方式就是使用 USB 调试。首先请确保你有 [USB debugging enabled on your device](https://www.google.com/search?q=android+Enable+USB+debugging)。一旦在设备上调试是被允许的，在连接的设备上你可以以同样的方式在模拟器里面使用  `react-native run-android` 来安装并且运行你的 React Native 应用。

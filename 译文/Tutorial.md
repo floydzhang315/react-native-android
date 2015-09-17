@@ -1,3 +1,5 @@
+# 教程
+
 ## 序言
 
 这篇教程旨在让你使用 React Native 快速的开发 iOS 和 Android 应用。如果你会想什么是 React Native 并且为什么 Facebook 构建了它，这篇 [文章](https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/) 解释了为什么。

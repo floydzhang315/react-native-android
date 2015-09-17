@@ -6,17 +6,17 @@
 1. 字符串消息：将文本传递给 toast 的字符串
 2. int 持续期：toast 的持续期。可能是 `ToastAndroid.SHORT` 或 `ToastAndroid.LONG`
 
-### 方法
+## 方法
 
 static **show**(message: string, duration: number) 
 
-### 性质
+## 性质
 
 **SHORT**: MemberExpression 
 
 **LONG**: MemberExpression 
 
-### 示例
+## 示例
 
 ```java
 'use strict';

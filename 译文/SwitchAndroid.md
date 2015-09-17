@@ -1,9 +1,10 @@
-## SwitchAndroid
+# SwitchAndroid
+
 标准的 Android 双态切换组件
 
 ### 属性  
 
-**disable** tool
+**disable** bool
 
 如果为 true，则该组件不能进行交互。
 

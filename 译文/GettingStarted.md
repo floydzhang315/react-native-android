@@ -1,3 +1,4 @@
+# 起步
 
 ## 要求
 
@@ -42,7 +43,7 @@
 
 _如果您在开始的时候遇到任何问题，请参阅 [troubleshooting page](/react-native/docs/troubleshooting.html#content)._
 
-## 让安卓支持现有的 React Native 项目
+## 让安卓支持现有的 React Native 项目   
 
 如果您现在已经拥有一个(iOS) React Native 项目并且想让安卓也支持它, 那么您需要在您现有的项目目录中执行以下命令：
 

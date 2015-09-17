@@ -1,4 +1,4 @@
-## ToolbarAndroid
+# ToolbarAndroid
 
 React 组件，包装了 Android `Toolbar` [小工具](https://developer.android.com/reference/android/support/v7/widget/Toolbar.html)。工具栏可以显示一个标志，导航图标（如汉堡包菜单），标题和副标题和操作列表。标题和子标题被扩展这样以来标志和导航图标显示在左边，标题和副标题在中间并且操作在右边。
 
@@ -21,7 +21,7 @@ React 组件，包装了 Android `Toolbar` [小工具](https://developer.android
      }
     }
 ```
-### 属性 
+## 属性 
 
 **actions** [{title: string, icon: Image.propTypes.source, show: enum('always', 'ifRoom', 'never'), showWithText: bool}] 
 

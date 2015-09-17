@@ -1,4 +1,5 @@
-## DrawerLayoutAndroid
+#  DrawerLayoutAndroid
+
 React 组件封装平台 `DrawerLayout`（仅适用于Android）。Drawer（通常用于导航）呈现 `renderNavigationView` 渲染导航视图和直接子级，是呈现（您的内容）的主要视图。导航视图是最初在屏幕上不可见的，但可以从由 `drawerPosition` 指定的窗口的侧面拉出，其宽度可通过 `drawerWidth` 设置。
 
 例如：   
@@ -21,7 +22,7 @@ React 组件封装平台 `DrawerLayout`（仅适用于Android）。Drawer（通�
     },
  ```  
  
-### 属性  
+## 属性  
                         
 **drawerPosition** enum(DrawerConsts.DrawerPosition.Left, DrawerConsts.DrawerPosition.Right)
 
