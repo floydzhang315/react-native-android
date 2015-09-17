@@ -60,8 +60,8 @@
 - **text** 当元素应该被视为不能更改的静态文本的时候使用。
 - **summary** 当在应用程序首次启动的时候，该元素可以提供应用程序的实时状况的摘要的时候使用。例如，当关于天气的应用程序首次启动的时候，带有当天天气信息的元素将被该特征所标记。
 - **disabled** 当控件未启动并且对用户的输入无响应的时候使用。
-- **frequentUpdates** Used when the element frequently updates its label or value, but too often to send notifications. Allows an accessibility client to poll for changes. A stopwatch would be an example.
-- **startsMedia** Used when activating an element starts a media session (e.g. playing a movie, recording audio) that should not be interrupted by output from an assistive technology, like VoiceOver.
-- **adjustable** Used when an element can be "adjusted" (e.g. a slider).
-- **allowsDirectInteraction** Used when an element allows direct touch interaction for VoiceOver users (for example, a view representing a piano keyboard).
-- **pageTurn** Informs VoiceOver that it should scroll to the next page when it finishes reading the contents of the element.
+- **frequentUpdates** 当元素经常更新其标签或者它的值，但是太平凡的发送通知的时候使用。允许辅助功能客户端轮询更改。秒表就是一个例子。
+- **startsMedia** 当激活一个元素并开始一段媒体会话(例如播放电影，录制音频)不应该被辅助技术的输出所打断，比如 VoiceOver。
+- **adjustable** 当元素可以被"调整"的时候使用(例如滑块)。
+- **allowsDirectInteraction** 当元素允许 VoiceOver 用户直接进行触摸互动的时候使用(例如，表示一个钢琴键盘的视图)。
+- **pageTurn** 当它完成阅读的元素的内容时候通知 VoiceOver 需要滚动到下一个页面。
