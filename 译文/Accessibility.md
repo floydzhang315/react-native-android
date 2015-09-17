@@ -6,7 +6,7 @@
 
 ## Android 
 
-对 Android 系统而言，辅助功能涉及到了许多不同的话题，其中之一是让丧失视力的人能够使用您的应用程序。对于当前社会，谷歌提供了一个名叫 TalkBack 的内置屏幕读者服务机器人。使用该机器人，你可以使用触摸勘探和手势来使用移动设备和应用程序。TalkBack 将会使用文本语音转换器来阅读屏幕上的内容并且可以发出警报来通知用户有关于应用程序中的重要信息。点击[这里](https://support.google.com/accessibility/android)来了解更多关于 Android 的辅助功能的特征以及点击[这里](https://developer.android.com/guide/topics/ui/accessibility)来了解更多关于使您的本地应用程序的辅助功能。
+对 Android 系统而言，辅助功能涉及到了许多不同的话题，其中之一是让丧失视力的人能够使用您的应用程序。对于现在的社会，谷歌提供了一个名叫 TalkBack 的内置屏幕读者服务机器人。使用该机器人，你可以使用触摸勘探和手势来使用移动设备和应用程序。TalkBack 可以使用文本语音转换器来阅读屏幕上的内容并且可以发出警报来通知用户有关于应用程序中的重要信息。点击[这里](https://support.google.com/accessibility/android)来了解更多关于 Android 的辅助功能的特征以及点击[这里](https://developer.android.com/guide/topics/ui/accessibility)来了解更多关于使您的本地应用程序的辅助功能。
 
 ## 创建辅助性应用程序
 
@@ -14,7 +14,7 @@
 
 #### 辅助性（iOS, Android）
 
-如果为 `true`，表示该视图是一个辅助功能元素。当视图死辅助功能元素时，它把它的子元素分组成一个单一的可选组件。默认情况下，可触摸的所有元素都具有辅助性。
+如果为 `true`的情况，代表该视图是一个辅助功能元素。当视图是辅助功能元素时，它把它的子元素分组成一个单一的可选组件。默认情况下，可触摸的所有元素都具有辅助性。
 
 在 Android 系统中，在 react-native  视图中 ' accessible={true}' 属性将被翻译成本地命令 ' focusable={true}'。
 
@@ -29,9 +29,9 @@
 
 #### accessibilityLabel (iOS, Android)
 
-将视图标记为具有辅助性，那么一个比较好的做法就是为这个视图设置一个 accessibilityLabel 标签以便使用 VoiceOver 的人知道他们选择了什么元素。当用户选择了一些元素，那么 VoiceOver 将会阅读响应的字符串文本。
+如果要将视图标记为具有辅助性，那么一个比较好的做法就是为这个视图设置一个 accessibilityLabel 标签以便使用 VoiceOver 的人知道他们选择了什么元素。当用户选择了一些元素，那么 VoiceOver 将会阅读响应的字符串文本。
 
-若要使用它，在您的视图中将 accessibilityLabel 属性设置为一个自定义的字符串：
+若要使用它，在您的视图中将 `accessibilityLabel` 属性设置为一个自定义的字符串：
 
 ```java
 <TouchableOpacity accessible={true} accessibilityLabel={'Tap me!'} onPress={this._onPress}>
@@ -48,7 +48,7 @@
 
 如果要使用它，请把 accessibilityTraits 属性设置为 accessibilityTraits 辅助功能字符串(或数组)之一：
 
-- **none** 单元素没有特征的时候使用。
+- **none** 当元素没有特征的时候使用。
 - **button** 当元素需要被当做一个按钮的时候使用。
 - **link** 当元素需要被当做链接的时候使用。
 - **header** 当元素作为内容部分的标题 (如导航栏中的标题) 的时候使用。
@@ -127,9 +127,9 @@
 </View>
 ```
 
-在上面的示例中，对于 TalkBack 以及其他的辅助功能服务而言，黄色的布局及其后代是完全不可见的。所以我们可以很容易地使用重叠视图没有混乱对讲同一个父。所以我们可以容易的使用来自于同一个父元素并且不带有令人疑惑的 TalkBack 的视图。
+在上面的示例中，对于 TalkBack 以及其他的辅助功能服务而言，黄色的布局及其后代是完全不可见的。所以我们可以容易的使用来自于同一个父元素并且不带有令人疑惑的 TalkBack 的视图。
 
-### 发送辅助功能时间（Android）
+### 发送辅助功能事件（Android）
 
 有时候在 UI 组件中去触发一个辅助功能事件很有用 (即当一个自定义的视图在屏幕上显示或自定义单选按钮已被选中)。为了达到这个目的，本地 UIManager 模块公布了一个名叫 'sendAccessibilityEvent' 的方法。它拥有两个参数： 视图标签和一个类型的事件。
 
@@ -153,8 +153,8 @@ _onPress: function() {
 
 ## 测试 VoiceOver 支持的内容（iOS）
 
-如果要启用 VoiceOver，那么请在你的 iOS 设备上打开设置应用程序的位置。点击 General，然后点击 Accessibility。那里你会发现许多人们用来优化他们的设备的工具，比如如粗体文本、 增加的对比度以及 VoiceOver。
+如果要启用 VoiceOver，那么请在你的 iOS 设备上打开设置应用程序的位置。点击 General，然后点击 Accessibility。那里你会发现许多人们用来优化他们的设备的工具，比如粗体文本、 增加的对比度以及 VoiceOver。
 
-如果要启用 VoiceOver，点击  "Vision" 下的VoiceOver，打开显示在顶部的开关。
+如果要启用 VoiceOver，点击  "Vision" 下的 VoiceOver，打开显示在顶部的开关。
 
 在辅助功能设置的最底部，还有一个"辅助功能的快捷方式"。你可以使用它三次单击主页按钮来触发 VoiceOver。
