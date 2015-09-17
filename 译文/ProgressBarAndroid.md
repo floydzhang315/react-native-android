@@ -1,4 +1,4 @@
-# Android 进度条
+# ProgressBarAndroid
 
 React 组建包裹了只是 Android 部分的 `ProgressBar`。这个组件是被用来提示这个应用正在加载或者在应用里面有一些操作。
 
