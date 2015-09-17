@@ -77,3 +77,22 @@
 #### accessibilityComponentType (Android) 
 
 在某些情况下，我们也要提醒选定的组件类型的最终用户 (即，它是一个"按钮")。如果我们正在使用本机的按钮，那么它会自动工作。由于我们使用的是 javascript，所以我们需要为  TalkBack 提供更多的语境。为了达到这个目的，您必须为所有 UI 组件指定 'accessibilityComponentType' 属性。例如，我们支持 'button'，'radiobutton_checked' 和 'radiobutton_unchecked'等。
+
+```java
+<TouchableWithoutFeedback accessibilityComponentType=”button”
+  onPress={this._onPress}>
+  <View style={styles.button}>
+    <Text style={styles.buttonText}>Press me!</Text>
+  </View>
+</TouchableWithoutFeedback>
+```
+
+在上面的示例中，TouchableWithoutFeedback 是被 TalkBack 作为一个本机按钮声明的。
+
+#### accessibilityLiveRegion (Android)
+
+当组件动态的更改时，我们希望 TalkBack 去提醒最终用户。'AccessibilityLiveRegion' 属性让这成为可能。它可以被设置为 ‘none’, ‘polite’ 以及 ‘assertive’。
+
+- **none** 辅助功能服务不应该对此视图通知改变的地方。
+- **polite** 辅助功能服务应该对此视图通知改变的地方。
+- **assertive** 辅助功能服务应该中断正在进行的会话，并且以立即宣布该视图的改变。
